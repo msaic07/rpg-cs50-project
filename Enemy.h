@@ -1,9 +1,10 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
 #include <string>
-#include "Player.h"
 
+class Player;
 class Enemy{
+	friend std::ostream& operator<<(std::ostream& os, const Enemy& e);
 private:
 	std::string name;
 	int health = 20;
@@ -12,15 +13,17 @@ public:
 	Enemy(std::string name, int health) : name{ name }, health{ health } {}
 	~Enemy() = default;
 
-	std::string get_name() { return name; }
+	std::string get_name() const{ return name; }
 	void set_name(std::string name) { this->name = name; }
 
-	int get_health() { return health; }
+	int get_health() const{ return health; }
 	void set_health(int health) { this->health = health; }
 
-	//void attack(Player& player);
+	//Enemy commands
+	void attack(Player& player);
+	void heal(Enemy& enemy);
 
-	void take_damage() { health = health - 1; }
+	void take_damage(Enemy& enemy);
 
 };
 

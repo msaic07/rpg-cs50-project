@@ -6,7 +6,7 @@
 int main() {
 
 	Player player;
-	Enemy enemy;
+	Enemy enemy{ "Gremlin",  20 };
 	std::string player_name;
 	std::cout << "What is your name? ";
 	std::getline(std::cin, player_name);
@@ -15,13 +15,30 @@ int main() {
 	std::cout << "The village is being attacked " << player_name << "!" << std::endl;
 
 	//tests
-	std::cout << enemy.get_health() << std::endl;
+	std::cout << enemy;
 	player.attack(enemy);
-	std::cout << enemy.get_health() << std::endl;
+	std::cout << enemy;
 
-	/*std::cout << player_name << "'s" << " health: " << player.get_health() << std::endl;
+	std::cout << player;
 	enemy.attack(player);
-	std::cout << player_name << "'s" << " health: " << player.get_health() << std::endl;*/
+	std::cout << player;
+
+	player.heal(player);
+	std::cout << player;
+	player.heal(player);
+	std::cout << player;
+
+	enemy.heal(enemy);
+	std::cout << enemy;
+	enemy.heal(enemy);
+	std::cout << enemy;
+
+	player.defend(player);
+	std::cout << player;
+	enemy.attack(player);
+	std::cout << player;
+	enemy.attack(player);
+	std::cout << player;
 
 	return 0;
 }
