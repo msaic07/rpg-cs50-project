@@ -13,7 +13,7 @@ int main() {
 	player.set_name(player_name);
 
 	std::cout << "The village is being attacked " << player_name << "!" << std::endl;
-
+	
 	//tests
 	std::cout << enemy;
 	player.attack(enemy);
@@ -32,13 +32,6 @@ int main() {
 	std::cout << enemy;
 	enemy.heal(enemy);
 	std::cout << enemy;
-
-	player.defend(player);
-	std::cout << player;
-	enemy.attack(player);
-	std::cout << player;
-	enemy.attack(player);
-	std::cout << player;
 
 	return 0;
 }

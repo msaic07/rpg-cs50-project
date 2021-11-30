@@ -23,7 +23,6 @@ public:
 	//Player commands
 	void attack(Enemy& enemy);
 	void heal(Player& player);
-	void defend(Player& player);
 
 	void take_damage(Player& player);
 

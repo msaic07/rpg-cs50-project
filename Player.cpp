@@ -5,22 +5,12 @@
 void Player::attack(Enemy& enemy){
 	if (enemy.get_health() > 0) {
 		enemy.take_damage(enemy);
-		is_attacked = true;
-	}
-	else {
-		is_attacked = false;
 	}
 }
 
 void Player::heal(Player& player){
 	if (player.get_health() > 0) {
 		player.set_health(health += 1);
-	}
-}
-
-void Player::defend(Player& player){
-	if (is_attacked == true) {
-		player.set_health(health -= 1);
 	}
 }
 
