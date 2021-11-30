@@ -8,9 +8,12 @@ class Player{
 private:
 	std::string name;
 	int health = 20;
-	bool is_attacked;
+	int max_health = 20;
+	bool error;
+	bool incorrect_command;
+	bool game_over;
 public:
-	Player() = default;
+	Player();
 	Player(std::string name, int health) : name{ name }, health{ health } {}
 	~Player() = default;
 
@@ -23,6 +26,7 @@ public:
 	//Player commands
 	void attack(Enemy& enemy);
 	void heal(Player& player);
+	void commands(Player& player, Enemy& enemy);
 
 	void take_damage(Player& player);
 
