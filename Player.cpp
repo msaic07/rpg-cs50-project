@@ -16,34 +16,45 @@ void Player::attack(Enemy& enemy){
 }
 
 void Player::heal(Player& player){
-	if (player.get_health() > 0 && player.get_health() < max_health) {
-		player.set_health(health += 1);
-		error = false;
+	if (player.get_health() > 0 && player.get_health() < max_health && potions > 0) {
+		player.set_health(health += 3);
+		--potions;
 	}
-	else {
-		std::cout << "You already have full health!";
-		error = true;
+	else if(potions <= 0) {
+		std::cout << "You don't have any potions!" << std::endl;
+	}
+	else{
+		std::cout << "You already have full health!" << std::endl;
 	}
 }
 
-void Player::commands(Player& player, Enemy& enemy){
+void Player::commands(Player& player, Enemy& enemy) {
 	int command{};
 
+
 	while (!error && !game_over || !error && !game_over && incorrect_command) {
+		std::cout << "===============================================" << std::endl;
 		switch (command) {
 		case 1:
-			Player::attack(enemy);
+			player.attack(enemy);
+			std::cout << player.get_name() << " attacked for 3 hp!" << std::endl;
 			break;
 		case 2:
-			Player::heal(player);
+			player.heal(player);
+			std::cout << "You healed for 3 hp!" << std::endl;
 			break;
 		default:
 			incorrect_command = true;
 			std::cout << "Incorrect command, try again" << std::endl;
 			break;
 		}
-        std::cout "Choose your command: ";
+		std::cout << player.get_name() << ": " << player.get_health() << std::endl;
+		std::cout << enemy.get_name() << ": " << enemy.get_health() << std::endl;
+		std::cout << "Choose your command: ";
 		std::cin >> command;
+
+		enemy.attack(player);
+		std::cout << enemy.get_name() << " attacked for 2 hp!" << std::endl;
 	}
 }
 

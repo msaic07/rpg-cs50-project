@@ -9,6 +9,7 @@ private:
 	std::string name;
 	int health = 20;
 	int max_health = 20;
+	int potions = 3;
 	bool error;
 	bool incorrect_command;
 	bool game_over;
