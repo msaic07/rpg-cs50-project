@@ -6,13 +6,13 @@
 int main() {
 
 	Player player;
-	Enemy enemy{ "Goblin",  20 };
+	Enemy enemy{ "Giant Goblin",  20 };
 	std::string player_name;
 	std::cout << "What is your name? ";
 	std::getline(std::cin, player_name);
 	player.set_name(player_name);
 
-	std::cout << "The village is being attacked " << player_name << "!" << std::endl;	
+	std::cout << "The village is being attacked by a giant goblin " << player_name << "!" << std::endl;	
 
 	player.commands(player, enemy);
 	
