@@ -7,9 +7,9 @@ class Player{
 	friend std::ostream& operator<<(std::ostream& os, const Player& p);
 private:
 	std::string name;
-	int health = 20;
-	int max_health = 20;
-	int potions = 3;
+	int health;
+	int max_health = 45;
+	int potions = 2;
 	bool isPlayersTurn;
 	bool game_over;
 public:

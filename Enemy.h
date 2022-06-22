@@ -8,6 +8,7 @@ class Enemy{
 private:
 	std::string name;
 	int health = 20;
+	bool usedPotion = false;
 public:
 	Enemy() = default;
 	Enemy(std::string name, int health) : name{ name }, health{ health } {}

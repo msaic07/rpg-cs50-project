@@ -16,7 +16,7 @@ void Player::attack(Enemy& enemy){
 
 void Player::heal(Player& player){
 	if (player.get_health() > 0 && player.get_health() < max_health && potions > 0) {
-		player.set_health(health += 5);
+		player.set_health(health += 6);
 		std::cout << "You healed for 3 hp!" << std::endl;
 		isPlayersTurn = false;
 		--potions;
@@ -33,13 +33,17 @@ void Player::heal(Player& player){
 
 void Player::commands(Player& player, Enemy& enemy) {
 	int command{};
+	bool enemyUsedPotion = false;
+	bool usedMegaPotion = false;
 
 	do{
 		std::cout << "===============================================" << std::endl;
 		std::cout << player.get_name() << ": " << player.get_health() << std::endl;
 		std::cout << enemy.get_name() << ": " << enemy.get_health() << std::endl;
-		std::cout << "Choose your command:\nAttack: 1\nHeal: 2\n";
+		std::cout << "Potions: " << potions << "\n\n";
+		std::cout << "Choose your command:\nAttack: 1\nHeal: 2\nMega Potion: 3\n";
 		std::cin >> command;
+
 		if (command == 1) {
 			player.attack(enemy);
 			isPlayersTurn = false;
@@ -48,14 +52,48 @@ void Player::commands(Player& player, Enemy& enemy) {
 		else if (command == 2) {
 			player.heal(player);
 		}
+		else if (command == 3 && !usedMegaPotion) {
+			player.set_health(health += 10);
+			usedMegaPotion = true;
+			isPlayersTurn = false;
+		}
+		else if (command == 3 && usedMegaPotion) {
+			std::cout << "Sorry, you already used your mega potion!" << std::endl;
+			isPlayersTurn = true;
+		}
 		else {
 			std::cout << "Please enter a valid command!" << std::endl;
+			isPlayersTurn = true;
 		}
 
 		if (!isPlayersTurn) {
-			enemy.attack(player);
-			std::cout << enemy.get_name() << " attacked for 3 hp!" << std::endl;
+			if (enemy.get_health() < 5 && enemy.get_health() > 0 && !enemyUsedPotion) {
+				enemy.heal(enemy);
+				enemyUsedPotion = true;
+				std::cout << enemy.get_name() << " healed for 15 hp!" << std::endl;
+			}
+			else {
+				enemy.attack(player);
+				std::cout << enemy.get_name() << " attacked for 4 hp!" << std::endl;
+			}
 		}
+
+		if (enemy.get_health() <= 0 && health > 0) {
+			game_over = true;
+			std::cout << "  _     _      ___     __ __              __     __    __     ____     __    __  " << std::endl;
+			std::cout << " | |   | |    /   \\   | | | |            | \\    / |   |  |   |     \\  |  |  |  |     " << std::endl;
+			std::cout << " | |   | |   | __  |  | | | |            |  \\/\\/  |   |  |   |  |\\  \\ |  |  |  |     " << std::endl;
+			std::cout << "  \\ \\ / /    |     |  | |_| |            |        |   |  |   |  | \\  \\|  |  |__|                 " << std::endl;
+			std::cout << "   |  |      \\    /   |     |            |   /\\   |   |  |   |  |  \\     |   __             " << std::endl;
+			std::cout << "   |__|       \\__/     \\___/             |__/  \\__|   |__|   |__|   \\____|  |__|                  " << std::endl;
+		}
+
+		if (health <= 0) {
+			game_over = true;
+			std::cout << std::endl;
+			std::cout << "You lost!" << std::endl;
+		}
+
 	} while (!game_over);
 }
 

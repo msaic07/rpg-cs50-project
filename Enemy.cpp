@@ -10,7 +10,7 @@ void Enemy::attack(Player& player) {
 
 void Enemy::heal(Enemy& enemy) {
 	if (enemy.get_health() > 0) {
-		enemy.set_health(health += 1);
+		enemy.set_health(health += 15);
 	}
 }
 

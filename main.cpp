@@ -6,7 +6,7 @@
 int main() {
 
 	Player player;
-	Enemy enemy{ "Giant Goblin",  20 };
+	Enemy enemy{ "Giant Goblin",  30 };
 	std::string player_name;
 	std::cout << "What is your name? ";
 	std::getline(std::cin, player_name);
