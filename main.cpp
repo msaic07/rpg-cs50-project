@@ -6,6 +6,9 @@
 
 int main() {
 
+	//makes sure all attacks are randomized
+	srand(static_cast<unsigned>(time(NULL)));
+
 	Player player;
 	Enemy enemy{ "Giant Goblin",  30 };
 	std::string player_name;

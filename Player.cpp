@@ -134,7 +134,7 @@ void Player::commands(Player& player, Enemy& enemy) {
 
 void Player::take_damage(Player& player){
 	if (player.get_health() > 0) {
-		damage = rand() % 6;
+		damage = rand() % 5 + 1;
 		player.set_health(health = health - damage);
 	}
 }
