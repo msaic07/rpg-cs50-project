@@ -1,5 +1,6 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
+
 #include <string>
 
 class Player;
@@ -25,6 +26,8 @@ public:
 	void heal(Enemy& enemy);
 
 	void take_damage(Enemy& enemy);
+
+	static int damage;
 
 };
 

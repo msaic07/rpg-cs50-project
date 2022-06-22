@@ -1,5 +1,6 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
+
 #include <string>
 
 class Enemy;
@@ -8,8 +9,9 @@ class Player{
 private:
 	std::string name;
 	int health;
-	int max_health = 45;
+	int max_health = 40;
 	int potions = 2;
+	int damage{};
 	bool isPlayersTurn;
 	bool game_over;
 public:

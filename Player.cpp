@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "Enemy.h"
+
 #include <iostream>
+#include <time.h>
 
 Player::Player(){
 	health = max_health;
@@ -37,36 +39,68 @@ void Player::commands(Player& player, Enemy& enemy) {
 	bool usedMegaPotion = false;
 
 	do{
+
 		std::cout << "===============================================" << std::endl;
 		std::cout << player.get_name() << ": " << player.get_health() << std::endl;
 		std::cout << enemy.get_name() << ": " << enemy.get_health() << std::endl;
 		std::cout << "Potions: " << potions << "\n\n";
-		std::cout << "Choose your command:\nAttack: 1\nHeal: 2\nMega Potion: 3\n";
+		std::cout << "Choose your command:\nAttack: 1\nHeal: 2\nMega Potion: 3 (You only get one!)\n";
 		std::cin >> command;
+		std::cout << std::endl;
 
 		if (command == 1) {
+
 			player.attack(enemy);
 			isPlayersTurn = false;
-			std::cout << player.get_name() << " attacked for 2 hp!" << std::endl;
+
+			if (Enemy::damage >= 2 && Enemy::damage <= 4) {
+				std::cout << player.get_name() << " attacked for " << Enemy::damage << " hp!" << std::endl;
+			}
+			else if (Enemy::damage == 5) {
+				std::cout << "Critical hit! " << player.get_name() << " attacked for 5 hp!" << std::endl;
+			}
+			else if (Enemy::damage == 1) {
+				std::cout << "Weak hit! " << player.get_name() << " attacked for 1 hp!" << std::endl;
+			}
+			else {
+				std::cout << player.get_name() << " missed!" << std::endl;
+			}
+
 		}
 		else if (command == 2) {
+
 			player.heal(player);
+
 		}
-		else if (command == 3 && !usedMegaPotion) {
+		else if (command == 3 && !usedMegaPotion && health <= max_health) {
+
 			player.set_health(health += 10);
+			std::cout << player.get_name() << " used a mega potion and got 10 hp!" << std::endl;
 			usedMegaPotion = true;
 			isPlayersTurn = false;
+
 		}
-		else if (command == 3 && usedMegaPotion) {
+		else if (command == 3 && usedMegaPotion && health <= max_health) {
+
 			std::cout << "Sorry, you already used your mega potion!" << std::endl;
 			isPlayersTurn = true;
+
+		}
+		else if (command == 3 && health >= max_health) {
+
+			std::cout << "You already have full health!" << std::endl;
+			isPlayersTurn = true;
+
 		}
 		else {
+
 			std::cout << "Please enter a valid command!" << std::endl;
 			isPlayersTurn = true;
+
 		}
 
 		if (!isPlayersTurn) {
+
 			if (enemy.get_health() < 5 && enemy.get_health() > 0 && !enemyUsedPotion) {
 				enemy.heal(enemy);
 				enemyUsedPotion = true;
@@ -74,8 +108,9 @@ void Player::commands(Player& player, Enemy& enemy) {
 			}
 			else {
 				enemy.attack(player);
-				std::cout << enemy.get_name() << " attacked for 4 hp!" << std::endl;
+				std::cout << enemy.get_name() << " attacked for " << damage <<  " hp!" << std::endl;
 			}
+
 		}
 
 		if (enemy.get_health() <= 0 && health > 0) {
@@ -99,10 +134,12 @@ void Player::commands(Player& player, Enemy& enemy) {
 
 void Player::take_damage(Player& player){
 	if (player.get_health() > 0) {
-		player.set_health(health = health - 4);
+		damage = rand() % 6;
+		player.set_health(health = health - damage);
 	}
 }
 
+//debugging
 std::ostream& operator<<(std::ostream& os, const Player& p){
 	os << p.get_name() << "'s health: " << p.get_health() << std::endl;
 	return os;
