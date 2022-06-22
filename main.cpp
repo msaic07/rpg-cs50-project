@@ -9,6 +9,8 @@ int main() {
 	//makes sure all attacks are randomized
 	srand(static_cast<unsigned>(time(NULL)));
 
+
+	//creates player and enemy
 	Player player;
 	Enemy enemy{ "Giant Goblin",  30 };
 	std::string player_name;
@@ -18,26 +20,8 @@ int main() {
 
 	std::cout << "The village is being attacked by a giant goblin " << player_name << "!" << std::endl;	
 
+	//starts the game
 	player.commands(player, enemy);
-	
-	//tests
-	//std::cout << enemy;
-	//player.attack(enemy);
-	//std::cout << enemy;
-
-	//std::cout << player;
-	//enemy.attack(player);
-	//std::cout << player;
-
-	//player.heal(player);
-	//std::cout << player;
-	//player.heal(player);
-	//std::cout << player;
-
-	//enemy.heal(enemy);
-	//std::cout << enemy;
-	//enemy.heal(enemy);
-	//std::cout << enemy;
 
 	return 0;
 }

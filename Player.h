@@ -19,6 +19,7 @@ public:
 	Player(std::string name, int health) : name{ name }, health{ health } {}
 	~Player() = default;
 
+	//getters and setters
 	std::string get_name() const{ return name; }
 	void set_name(std::string name) { this->name = name; }
 

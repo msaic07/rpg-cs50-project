@@ -27,6 +27,7 @@ public:
 
 	void take_damage(Enemy& enemy);
 
+	//static so it can be used in Player.cpp
 	static int damage;
 
 };
