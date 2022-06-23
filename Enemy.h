@@ -4,6 +4,7 @@
 #include <string>
 
 class Player;
+
 class Enemy{
 	friend std::ostream& operator<<(std::ostream& os, const Enemy& e);
 private:
@@ -32,4 +33,4 @@ public:
 
 };
 
-#endif
+#endif //_ENEMY_H_

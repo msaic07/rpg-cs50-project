@@ -20,8 +20,8 @@ void Player::attack(Enemy& enemy){
 void Player::heal(Player& player){
 	//Sees if potions are 0 and if player has full health, otherwise heal
 	if (player.get_health() > 0 && player.get_health() < max_health && potions > 0) {
-		player.set_health(health += 6);
-		std::cout << "You healed for 3 hp!" << std::endl;
+		player.set_health(health += 5);
+		std::cout << "You healed for 5 hp!" << std::endl;
 		isPlayersTurn = false;
 		--potions;
 	}
@@ -44,9 +44,9 @@ void Player::commands(Player& player, Enemy& enemy) {
 	do{
 		//displays this for every turn
 		std::cout << "===============================================" << std::endl;
-		std::cout << player.get_name() << ": " << player.get_health() << std::endl;
-		std::cout << enemy.get_name() << ": " << enemy.get_health() << std::endl;
-		std::cout << "Potions: " << potions << "\n\n";
+		std::cout << player.get_name() << "'s health: " << player.get_health() << std::endl;
+		std::cout << enemy.get_name() << "'s health: " << enemy.get_health() << std::endl;
+		std::cout << "Health Potions: " << potions << "\n\n";
 		std::cout << "Choose your command:\nAttack: 1\nHeal: 2\nMega Potion: 3 (You only get one!)\n";
 		std::cin >> command;
 		std::cout << std::endl;
@@ -58,10 +58,10 @@ void Player::commands(Player& player, Enemy& enemy) {
 			isPlayersTurn = false;
 
 			//Since damage is randomized, there will be different outputs for the amount of damage the player does
-			if (Enemy::damage >= 2 && Enemy::damage <= 4) {
+			if (Enemy::damage >= 2 && Enemy::damage <= 5) {
 				std::cout << player.get_name() << " attacked for " << Enemy::damage << " hp!" << std::endl;
 			}
-			else if (Enemy::damage == 5) {
+			else if (Enemy::damage == 6) {
 				std::cout << "Critical hit! " << player.get_name() << " attacked for 5 hp!" << std::endl;
 			}
 			else if (Enemy::damage == 1) {
