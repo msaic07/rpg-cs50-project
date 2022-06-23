@@ -1,6 +1,6 @@
 # Goblin fight rpg
 
-## Video demo: 
+## Video demo: https://www.youtube.com/watch?v=Y7GM63uOoJw
 
 ## The Game
 
